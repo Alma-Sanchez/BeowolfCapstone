@@ -6,66 +6,73 @@
 	<link rel="stylesheet" type="text/css" href="CSS/styleSheet.css">
 </head>
 <body>
-<div class="bodyContainer">
-	<h1>Beowolf Cluster at AU</h1>
-	<p>After doing some research, I was not able to find updated information in order to build this project. In doing projects like these documention is helpful. So I have created thiss repository.</p>
+	<div class="bodyContainer">
+		<h1>Beowolf Cluster at AU</h1>
+		<p>After doing some research, I was not able to find updated information in order to build this project. In doing projects like these documention is helpful. So I have created thiss repository.</p>
 
-	<h1>The Steps I took</h1>
-	<ol>
-		<li>Install Debian off campus cause eagle secure sucks</li>
-			<ul>
-				<li>This makes you create a separate non-root user</li>
-				<li>Automatically logs into new user</li>
-			</ul>
+		<h1>The Steps I took</h1>
+		<ol>
+			<li>Install Debian off campus cause eagle secure sucks</li>
+				<ul>
+					<li>This makes you create a separate non-root user</li>
+					<li>Automatically logs into new user</li>
+				</ul>
 
-		<li>Make sure your master node has an IP address</li>
-		<li>Login as root:</li>
+			<li>Make sure your master node has an IP address</li>
+			<li>Login as root:</li>
+				<ul>
+					<li><span class="commands">$ su root</span></li>
+					<li>Type password</li>
+				</ul>
+			<li>Install sudo:</li>
+				<ul><li>Apt-get install sudo</li></ul>
+			<li>Give sudo access to admin user in order to disable root log-in</li>
 			<ul>
-				<li><span class="commands">$ su root</span></li>
-				<li>Type password</li>
-			</ul>
-		<li>Install sudo:</li>
-			<ul><li>Apt-get install sudo</li></ul>
-		<li>Give sudo access to admin user in order to disable root log-in</li>
-		<ul>
-			<li>Run <span class="commands">$ visudo</span> command</li>
-			<li>Look for<br><span class="sampleFile"># User privilege specification<br>
-					root        ALL=(ALL:ALL) ALL <br>
-					newuser     ALL=(ALL:ALL) ALL       #ADD THIS LINE</span>
-			</li>
-		</ul>
-		<li>New user should have admin privileges now, no need to use root now</li>
-		<li><span class="commands">Su username </span> //switches to new user, will ask for password</li>
-		<li>Create SSH login</li>
-			<ul>
-				<li><span class="commands">$ apt-get update</span> //not necessary but just in case</li>
-				<li><span class="commands">$ sudo apt-get install openssh-server</span></li>
-				<li><span class="commands">$ ssh-keygen -t dsa </span> //generates a new ssh key</li>
-					<ul>
-						<li>Press enter to keep default folder location</li>
-						<li>Leave passphrase empty, just press enter to skip</li>
-					</ul>
-			</ul>
-		<li>Now you will have the .ssh folder in your home directory</li>
-			<ul>
-				<li>Copy key to a new folder authorized_keys <br><br>
-					<span class="commands">$ cd /home/user/.ssh; cat id_dsa.pub >> authorized_keys;</span>
+				<li>Run <span class="commands">$ visudo</span> command</li>
+				<li>Look for<br><span class="sampleFile"># User privilege specification<br>
+						root        ALL=(ALL:ALL) ALL <br>
+						newuser     ALL=(ALL:ALL) ALL       #ADD THIS LINE</span>
 				</li>
 			</ul>
-		<li>Download MPICH</li>
-			<ul>
-				<li>I used the Synaptic Package Manager to install this, choose the latest MPICH version </li>
-				<li>Hello World example <br><img src="Images/helloWorldex.png"></li>
-				<li>If this works, you're good!</li>
-			</ul>
-
-
-		<li>Check for sshd</li>
-	</ol>
-	<h2>Sources</h2>
-	<p>13 Steps for a beowolf cluster:<br>
-	<a href="https://www.linux.com/blog/building-beowulf-cluster-just-13-steps">https://www.linux.com/blog/building-beowulf-cluster-just-13-steps</a></p>
-	<p><a href="https://jetcracker.wordpress.com/2012/03/01/how-to-install-mpi-in-ubuntu/">https://jetcracker.wordpress.com/2012/03/01/how-to-install-mpi-in-ubuntu/</a></p>
+			<li>New user should have admin privileges now, no need to use root now</li>
+			<li><span class="commands">Su username </span> //switches to new user, will ask for password</li>
+			<li>Create SSH login</li>
+				<ul>
+					<li><span class="commands">$ apt-get update</span> //not necessary but just in case</li>
+					<li><span class="commands">$ sudo apt-get install openssh-server</span></li>
+					<li><span class="commands">$ ssh-keygen -t dsa </span> //generates a new ssh key</li>
+						<ul>
+							<li>Press enter to keep default folder location</li>
+							<li>Leave passphrase empty, just press enter to skip</li>
+						</ul>
+				</ul>
+			<li>Now you will have the .ssh folder in your home directory</li>
+				<ul>
+					<li>Copy key to a new folder authorized_keys <br><br>
+						<span class="commands">$ cd /home/user/.ssh; cat id_dsa.pub >> authorized_keys;</span>
+					</li>
+				</ul>
+			<li>Download MPICH</li>
+				<ul>
+					<li>I used the Synaptic Package Manager to install this, choose the latest MPICH version </li>
+					<li>Hello World example <br><img src="Images/helloWorldex.png"></li>
+					<li>If this works, you're good!</li>
+				</ul>
+			<li>Install SSH</li>
+				<ul>
+					<li>apt-get install openssh-server</li>
+					<li>Get static ip address by googling What is my ip address</li>
+					<li>If needed and if you have access router, open port forwarding for port 22</li>
+					<li>Check for sshd <br>
+						<span class="commands">ps aux | grep sshd</span></li>
+				</ul>
+		</ol>
+		<footer>
+			<h2>Sources</h2>
+			<p>13 Steps for a beowolf cluster:<br>
+			<a href="https://www.linux.com/blog/building-beowulf-cluster-just-13-steps">https://www.linux.com/blog/building-beowulf-cluster-just-13-steps</a></p>
+			<p><a href="https://jetcracker.wordpress.com/2012/03/01/how-to-install-mpi-in-ubuntu/">https://jetcracker.wordpress.com/2012/03/01/how-to-install-mpi-in-ubuntu/</a></p>
+		</footer>
 	</div>
 </body>
 </html>
